@@ -11,17 +11,17 @@ def call(org.jenkinsci.plugins.workflow.cps.EnvActionImpl env, String name, Stri
                 if (! (param instanceof FileParameterValue)) {
                     error "unstashParam: not a file parameter: ${name}"
                 }
-                if (env['NODE_NAME'] == null) {
+                if (env.NODE_NAME == null) {
                     error "unstashParam: no node in current context"
                 }
-                if (env['WORKSPACE'] == null) {
+                if (env.WORKSPACE == null) {
                     error "unstashParam: no workspace in current context"
                 }
 
-       if (env['NODE_NAME'].equals("master")) {
-           workspace = new FilePath(null, env['WORKSPACE'])
+       if (env.NODE_NAME.equals("master")) {
+           workspace = new FilePath(null, env.WORKSPACE)
        }else{
-                        workspace = new FilePath(Jenkins.getInstance().getComputer(env['NODE_NAME']).getChannel(), env['WORKSPACE'])
+                        workspace = new FilePath(Jenkins.getInstance().getComputer(env.NODE_NAME).getChannel(), env.WORKSPACE)
        }
 
                 filename = fname == null ? param.getOriginalFileName() : fname
