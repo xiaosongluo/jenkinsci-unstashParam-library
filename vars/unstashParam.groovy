@@ -3,7 +3,7 @@ import hudson.model.ParametersAction
 import hudson.model.FileParameterValue
 import hudson.model.Executor
 
-def call(String name, String fname = null) {
+def call(Map env, String name, String fname = null) {
     def paramsAction = currentBuild.rawBuild.getAction(ParametersAction.class);
     if (paramsAction != null) {
         for (param in paramsAction.getParameters()) {
